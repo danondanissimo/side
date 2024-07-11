@@ -1,0 +1,13 @@
+.confirmButton,
+.closeButton {
+  border: 1px solid black;
+}
+
+.confirmButton:hover,
+.confirmButton:focus,
+.closeButton:hover,
+.closeButton:focus {
+  transform: scale(1.025);
+
+  box-shadow: 0px 0px 6px 1px rgba(237, 235, 228, 1);
+}

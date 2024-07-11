@@ -1,0 +1,41 @@
+.nav {
+  display: flex;
+  gap: 40px;
+  width: 768px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: 0 auto 0 auto;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background-color: rgb(255, 255, 255);
+  border: 1px solid peachpuff;
+}
+
+.navList {
+  display: flex;
+  gap: 28px;
+  list-style-type: none;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.main {
+  margin-top: 80px;
+}
+
+.logOutButton {
+  border: 1px solid black;
+}
+
+.logOutButton:hover,
+.logOutButton:focus {
+  transform: scale(1.1);
+
+  box-shadow: 0px 0px 6px 1px rgba(237, 235, 228, 1);
+}
