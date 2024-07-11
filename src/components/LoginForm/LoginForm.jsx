@@ -1,8 +1,9 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { apiLogin } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 const emailRegExp = /^[\w.-]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
 
@@ -22,21 +23,34 @@ const loginSchema = Yup.object({
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const onAddContact = (values, actions) => {
-    actions.resetForm();
-
-    dispatch(apiLogin(values));
+  const onAddContact = (values) => {
+    reset();
+    console.log(values);
+    // dispatch(apiLogin(values));
   };
 
-  const FORM_INITIAL_VALUES = {
-    email: "",
-    password: "",
+  // const FORM_INITIAL_VALUES = {
+  //   email: "",
+  //   password: "",
+  // };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+    onAddContact(data);
   };
 
   return (
     <div>
       {" "}
-      <Formik
+      {/* <Formik
         initialValues={FORM_INITIAL_VALUES}
         validationSchema={loginSchema}
         onSubmit={onAddContact}
@@ -56,7 +70,16 @@ const LoginForm = () => {
             Login
           </button>
         </Form>
-      </Formik>
+      </Formik> */}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>Email</label>
+        <input {...register("email")} />
+        <p>{errors.email?.message}</p>
+        <label>Password</label>
+        <input {...register("password")} />
+        <p>{errors.password?.message}</p>
+        <input type="submit" />
+      </form>
     </div>
   );
 };
